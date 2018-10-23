@@ -7,17 +7,28 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: null,
+      token: localStorage.getItem('IneffableUser'),
       username: null
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    Meteor.call('users.decodificate', this.state.token, (err, res) => {
+      if (err) {
+        alert('Err' + err.error);
+      } else if (res) {
+        this.setState({
+          username: res.username
+        });
+      }
+    });
+  }
 
   logOut() {
     this.setState({
       token: null,
-      nombre: null
+      username: null
     });
+    localStorage.removeItem('IneffableUser');
     window.location.reload();
   }
 

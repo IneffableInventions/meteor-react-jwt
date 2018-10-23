@@ -13,6 +13,22 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    Meteor.call(
+      'users.validateUser',
+      {
+        username: this.usernameInput.current.value,
+        password: this.passwordInput.current.value
+      },
+      (err, res) => {
+        if (err) {
+          alert(err.error);
+        } else {
+          localStorage.setItem('IneffableUser', res);
+          window.location.reload();
+        }
+      }
+    );
   }
 
   goToSignUp() {

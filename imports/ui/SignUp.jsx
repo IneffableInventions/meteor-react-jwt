@@ -6,6 +6,10 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
 
+    if (localStorage.getItem('IneffableUser')) {
+      this.props.history.push('/');
+    }
+
     this.usernameInput = React.createRef();
 
     this.passwordInput = React.createRef();
@@ -16,6 +20,32 @@ class SignUp extends Component {
 
     let username = this.usernameInput.current.value;
     let password = this.passwordInput.current.value;
+
+    Meteor.call(
+      'users.insert',
+      {
+        username: username,
+        password: password
+      },
+      (err, res) => {
+        if (err) {
+          alert(err.error);
+        } else if (res) {
+          Meteor.call(
+            'users.validateUser',
+            { username, password },
+            (err, res) => {
+              if (err) {
+                alert(err.error);
+              } else {
+                localStorage.setItem('IneffableUser', res);
+                window.location.reload();
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
   render() {

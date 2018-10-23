@@ -6,20 +6,30 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: null,
-      user: null
+      token: localStorage.getItem('IneffableUser'),
+      username: null
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    Meteor.call('users.decodificate', this.state.token, (err, res) => {
+      if (err) {
+        alert('Err' + err.error + err);
+      } else if (res) {
+        this.setState({
+          username: res.username
+        });
+      }
+    });
+  }
 
   loadBody() {
-    let user = this.state.user;
-    if (this.state.user) {
+    let username = this.state.username;
+    if (username) {
       return (
         <div className="col-12 text-center">
           <h3>
-            Welcome back <b>{user.name}</b>!
+            Welcome back <b>{username}</b>!
           </h3>
         </div>
       );
@@ -35,7 +45,7 @@ export default class Home extends Component {
             <a
               href="#"
               style={{ textDecoration: 'none' }}
-              class="text-primary"
+              className="text-primary"
               onClick={() => document.getElementById('buttonForLogIn').click()}
             >
               Log in
