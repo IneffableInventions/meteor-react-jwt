@@ -1,4 +1,61 @@
 body {
-  padding: 10px;
-  font-family: sans-serif;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.bg-ineffable {
+  background-color: #2a6c88;
+}
+
+.btn-ineffable {
+  color: white;
+  background-color: #2a6c88;
+  border-color: #2a6c88;
+}
+
+.btn-ineffable:hover {
+  color: white;
+  background-color: #2a6c88d0;
+  border-color: #2a6c88d0;
+}
+
+.btn-ineffable:focus,
+.btn-ineffable.focus {
+  box-shadow: 0 0 0 0.2rem rgba(42, 108, 136, 0.5);
+}
+
+.btn-ineffable.disabled,
+.btn-ineffable:disabled {
+  color: white;
+  background-color: #2a6c88d0;
+  border-color: #2a6c88d0;
+}
+
+.btn-ineffable:not(:disabled):not(.disabled):active,
+.btn-ineffable:not(:disabled):not(.disabled).active,
+.show>.btn-ineffable.dropdown-toggle {
+  color: white;
+  background-color: #2a6c88;
+  border-color: #2a6c88d0;
+}
+
+.btn-ineffable:not(:disabled):not(.disabled):active:focus,
+.btn-ineffable:not(:disabled):not(.disabled).active:focus,
+.show>.btn-ineffable.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(42, 108, 136, 0.5);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-ineffable {
+  color: #2a6c88;
 }
